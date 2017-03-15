@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Exec=moonplayer
+Name=MoonPlayer
+Icon=${SNAP}/meta/gui/icon.png

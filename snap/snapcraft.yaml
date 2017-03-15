@@ -1,0 +1,42 @@
+name: moonplayer 
+version: '0.1' 
+summary: Moonplayer
+description: |
+  This is moonplayer
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+apps:
+  moonplayer:
+    command: desktop-launch $SNAP/usr/bin/moonplayer
+#    environment:
+#      export PYTHONPATH: $SNAP/usr/lib/python3.5:$SNAP/usr/share/moonplayer/plugins:$PYTHONPATH
+    plugs: [network, x11, gsettings, opengl, home, pulseaudio, unity7, browser-support,network-bind]
+
+parts:
+  qt-app:
+    source: ./src    
+    plugin: qmake
+    qt-version: qt5
+    stage-packages:
+      - libmpv-dev
+      - overlay-scrollbar-gtk2
+      - libgail-dev
+      - libatk-bridge2.0-dev
+      - libatk-bridge2.0-0
+      - libatk-adaptor
+      - unity-gtk-module-common
+      - unity-gtk2-module:amd64
+      - libcanberra-gtk-module
+      - fonts-wqy-zenhei
+      - fcitx-frontend-qt5
+    after: [desktop-qt5]
+
+  py:
+    plugin: python3
+    source: .
+    stage-packages:
+      - you-get
+      - xdg-utils
+      - x11-xserver-utils
